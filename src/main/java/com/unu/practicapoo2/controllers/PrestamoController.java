@@ -61,11 +61,14 @@ public class PrestamoController extends HttpServlet {
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			if(model.eliminarPrestamo(id) > 0) {
-				System.out.println("Prestamo del cliente Eliminado Correctamente");
-			}else {
-				System.out.println("Error de Eliminacion");
+				
+				response.sendRedirect(request.getContextPath() + "/PrestamoController?op=cargarPrestamosCliente&id=" + request.getParameter("cliente"));
+			} else {
+				
+				request.setAttribute("message", "Error de Eliminacion");
+				request.getRequestDispatcher("/Error404.jsp").forward(request, response);
 			}
-			response.sendRedirect(request.getContextPath() + "/PrestamoController?op=cargarPrestamosCliente&id=" + request.getParameter("cliente"));
+			
 			
 		} catch (Exception e) {
 			System.out.println("Error en PrestamoController.eliminarPrestamo() \n " + e.getMessage().toString());
@@ -97,12 +100,14 @@ public class PrestamoController extends HttpServlet {
 			modificarPrestamo.setCuotas(Integer.parseInt(request.getParameter("cuotas")));
 			
 			if(model.modificarPrestamo(modificarPrestamo) > 0) {
-				System.out.println("Prestamo ModificadoCorrectamente");
-			}else {
-				System.out.println("Error de modificacion");
+				
+				response.sendRedirect(request.getContextPath() + "/PrestamoController?op=cargarPrestamosCliente&id=" + modificarPrestamo.getReferenciaCliente());
+			} else {
+				
+				request.setAttribute("message", "Error de Modificacion");
+				request.getRequestDispatcher("/Error404.jsp").forward(request, response);
 			}
 			
-			response.sendRedirect(request.getContextPath() + "/PrestamoController?op=cargarPrestamosCliente&id=" + modificarPrestamo.getReferenciaCliente());
 			
 		} catch (Exception e) {
 			System.out.println("Error en PrestamoController.modificarPrestamo() \n " + e.getMessage().toString());
@@ -158,14 +163,17 @@ public class PrestamoController extends HttpServlet {
 			nuevo.setCuotas(Integer.parseInt(request.getParameter("cuotas")));
 			
 			if(model.insertarPrestamo(nuevo) > 0) {
-				System.out.println("Prestamo Insertado Correctamente");
-			}else {
-				System.out.println("Error en ClienteController.insertarCliente().try{}");
+				
+				request.setAttribute("idCliente", nuevo.getReferenciaCliente());
+				request.setAttribute("listaPrestamosCliente", model.listaPrestamosCliente(nuevo.getReferenciaCliente()));
+				request.getRequestDispatcher("/Cliente/listadoPrestamosCliente.jsp").forward(request, response);
+			} else {
+				
+				request.setAttribute("message", "Error de Insercion");
+				request.getRequestDispatcher("/Error404.jsp").forward(request, response);
 			}
 			
-			request.setAttribute("idCliente", nuevo.getReferenciaCliente());
-			request.setAttribute("listaPrestamosCliente", model.listaPrestamosCliente(nuevo.getReferenciaCliente()));
-			request.getRequestDispatcher("/Cliente/listadoPrestamosCliente.jsp").forward(request, response);
+			
 			
 			
 		} catch (Exception e) {

@@ -13,7 +13,11 @@
 	int id = (int)(request.getAttribute("idCliente"));
 	
 	%>
-
+<script>
+    function confirmarAccion() {
+        return confirm("¿Estás seguro de que deseas realizar esta acción?");
+    }
+</script>
 </head>
 <body>
 
@@ -52,7 +56,7 @@
 					<td><%=c[6]%></td>
 					<td>
 						<a type = "button" href = "<%=url%>PrestamoController?op=obtener&id=<%=c[1]%>"> Modificar</a>
-						<a type = "button" href = "<%=url%>PrestamoController?op=eliminar&id=<%=c[1]%>&cliente=<%=id%>"> Eliminar</a>
+						<a type = "button" onclick="return confirmarAccion()" href = "<%=url%>PrestamoController?op=eliminar&id=<%=c[1]%>&cliente=<%=id%>"> Eliminar</a>
 						
 						
 					

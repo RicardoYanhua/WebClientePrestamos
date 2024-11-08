@@ -9,6 +9,11 @@
 <%
 String url = "http://localhost:8080/Practica_poo2/";
 %>
+<script>
+    function confirmarAccion() {
+        return confirm("¿Estás seguro de que deseas realizar esta acción?");
+    }
+</script>
 </head>
 <body>
 
@@ -33,7 +38,7 @@ String url = "http://localhost:8080/Practica_poo2/";
 				<label for = "direccion">Direccion</label>
 				<input type = "text" id = "direccion" name = "direccion" required> <br>
 			
-			<input type = "submit" value="Registrar Cliente"> <br>
+			<input type = "submit" onclick="return confirmarAccion()"  value="Registrar Cliente"> <br>
 			<a type = "button" href = "<%=url%>ClienteController">Volver Lista Clientes</a>
 		
 		

@@ -13,6 +13,11 @@
 	String url = "http://localhost:8080/Practica_poo2/";
 	List<Cliente> listaClientes = (List<Cliente>) request.getAttribute("listaClientes");
 	%>
+<script>
+    function confirmarAccion() {
+        return confirm("¿Estás seguro de que deseas realizar esta acción?");
+    }
+</script>
 
 </head>
 <body>
@@ -55,7 +60,7 @@
 					<td><%=c.getDireccion()%></td>
 					<td>
 						<a type = "button" href = "<%=url%>ClienteController?op=obtenerCliente&id=<%=c.getIDCliente()%>"> Modificar Datos</a>
-						<a type = "button" href = "<%=url%>ClienteController?op=eliminar&id=<%=c.getIDCliente()%>"> Eliminar Cliente</a>
+						<a type = "button" onclick="return confirmarAccion()"href = "<%=url%>ClienteController?op=eliminar&id=<%=c.getIDCliente()%>"> Eliminar Cliente</a>
 						<a type = "button" href = "<%=url%>PrestamoController?op=cargarPrestamosCliente&id=<%=c.getIDCliente()%>"> Prestamo</a>
 						
 					

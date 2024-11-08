@@ -12,7 +12,11 @@
 String url = "http://localhost:8080/Practica_poo2/";
 int idcliente = (int) request.getAttribute("idcliente");
 %>
-
+<script>
+    function confirmarAccion() {
+        return confirm("¿Estás seguro de que deseas realizar esta acción?");
+    }
+</script>
 </head>
 <body>
 
@@ -34,7 +38,7 @@ int idcliente = (int) request.getAttribute("idcliente");
 				<label for = "cuotas">Cuota</label>
 				<input type = "number" id = "cuotas" name = "cuotas"  min="0" required> <br>
 			
-			<input type = "submit" value="Registrar Prestamo del cliente"> <br>
+			<input type = "submit" onclick="return confirmarAccion()" value="Registrar Prestamo del cliente"> <br>
 			<a type = "button" href = "<%=url%>PrestamoController">Volver Lista de Prestamos</a>
 		
 		

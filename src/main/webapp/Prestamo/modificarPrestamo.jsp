@@ -16,6 +16,11 @@ if(request.getAttribute("prestamoEditar") !=null){
 	prestamo  = new Prestamo();
 }
 %>
+<script>
+    function confirmarAccion() {
+        return confirm("¿Estás seguro de que deseas realizar esta acción?");
+    }
+</script>
 </head>
 <body>
 
@@ -42,7 +47,7 @@ if(request.getAttribute("prestamoEditar") !=null){
 			
 			
 			
-			<input type = "submit" value="Guargar Prestamo">
+			<input type = "submit" onclick="return confirmarAccion()" value="Guargar Prestamo">
 			<a type = "button" href = "<%=url%>ClienteController">Volver Lista Clientes</a>
 		
 		
